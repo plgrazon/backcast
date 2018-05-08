@@ -1,19 +1,20 @@
 var VideoListView = Backbone.View.extend({
-  el: '.list',
-  container : '<div class=list></div>',
-  initialize: function() {
-  },
-  // ONLY MODIFY THIS and nothing else.
-  //we need to use this videolistview.js to pass each vid to videolistentry. 
-  //videolistEntry will dynamically put each video into html
+  // el: '.list',
+  // events: {
+  //   'click': this.render,
+  //   'sync' : this.render
+  // },
+  // initialize: function() {
+  //   // this.on('change', this.events, this)
+    
+  // },
+
   render: function() {
     this.$el.children().detach();
-    this.$el.html(this.template());
-    console.log(this.collection, 'this should exist')
-    
-    this.collection.forEach(function(model) {
-      new VideoListEntryView().render(model);
-    });
+    this.$el.html(this.template());  
+    this.$('.video-list').append(this.collection.map(function(video) {
+      return new VideoListEntryView({model: video}).render().el;
+    }));
     return this;
   },
 

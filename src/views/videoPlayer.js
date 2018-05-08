@@ -1,19 +1,18 @@
 var VideoPlayerView = Backbone.View.extend({
   el: '.player',
   initialize: function() {
-    // this.videoList = new Backbone.Collection("/src/data/exampleVideoData.js");
-    this.render();
+    // this.render();
+    this.listenTo(this.collection, 'select', this.handle)
   },
-
+  handle: function(selected) {
+    console.log('videoPlayer should fire..')
+    this.model = selected;
+    this.render(); 
+  },
   render: function() {
-    this.$el.html('<div class="loading">Please wait...</div>');
-    this.videos =  new Videos(window.exampleVideoData);
-    let vid = this.videos;
-      $('el').append(`<div>${this.videos.models[0]}</div>`)
-      this.$el.html(this.template(this.videos.model.attributes))
-      console.log('what is vidsss??', vid.attributes);
-      // $('.video-player-details').html(this.videos.model)
-    // }
+    // console.log('this is in VideoPlayer, and should fire on clicks', this.model)
+    let attributes = this.model.attributes;
+    this.$el.html(this.template(attributes))
     return this;
   },
 

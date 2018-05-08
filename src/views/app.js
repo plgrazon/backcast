@@ -1,27 +1,3 @@
-// var AppView = Backbone.View.extend({
-
-//   el: '#app',
-
-//   initialize: function() {
-//     this.videos = new Videos(window.exampleVideoData);
-//     this.render();
-//   },
-
-
-//   render: function() {
-//     this.$el.html(this.template());
-//     new SearchView().render();
-//     new VideoPlayerView().render();
-//     new VideoListView().render();
-//     return this;
-//   },
-
-//   template: templateURL('src/templates/app.html'),
-
-// });
-
-///////////////////////////////////////////
-
 var AppView = Backbone.View.extend({
 
   el: '#app',
@@ -31,12 +7,11 @@ var AppView = Backbone.View.extend({
     this.render();
   },
 
-
   render: function() {
     this.$el.html(this.template());
     new SearchView().render();
-    new VideoPlayerView().render();
-    new VideoListView({collection: this.videos}).render();
+    new VideoPlayerView({model: this.videos.at(0)}).render();
+    new VideoListView({collection: this.videos, el: '.list'}).render();
 
     return this;
   },
